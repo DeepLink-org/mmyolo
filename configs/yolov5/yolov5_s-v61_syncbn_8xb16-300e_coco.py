@@ -12,7 +12,7 @@ val_data_prefix = 'val2017/'  # Prefix of val image path
 
 num_classes = 80  # Number of classes for classification
 # Batch size of a single GPU during training
-train_batch_size_per_gpu = 16
+train_batch_size_per_gpu = 2
 # Worker to pre-fetch data for each single GPU during training
 train_num_workers = 8
 # persistent_workers must be False if num_workers is 0
@@ -252,7 +252,8 @@ optim_wrapper = dict(
         momentum=0.937,
         weight_decay=weight_decay,
         nesterov=True,
-        batch_size_per_gpu=train_batch_size_per_gpu),
+        batch_size_per_gpu=train_batch_size_per_gpu,
+        foreach=False),
     constructor='YOLOv5OptimizerConstructor')
 
 default_hooks = dict(

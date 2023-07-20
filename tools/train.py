@@ -4,12 +4,15 @@ import logging
 import os
 import os.path as osp
 
+from capture import insert_capture
+
 from mmengine.config import Config, DictAction
 from mmengine.logging import print_log
 from mmengine.runner import Runner
 
 from mmyolo.registry import RUNNERS
 from mmyolo.utils import is_metainfo_lower
+import torch
 
 
 def parse_args():
@@ -106,6 +109,8 @@ def main():
         # build customized runner from the registry
         # if 'runner_type' is set in the cfg
         runner = RUNNERS.build(cfg)
+
+    insert_capture(runner)
 
     # start training
     runner.train()
